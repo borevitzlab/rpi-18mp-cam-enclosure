@@ -52,8 +52,8 @@ difference(){
     
     // remove usb-holder from the cutaway
 	translate([(camXY-usbW)/2-width,0,wallH+15]) difference(){
-		cube([usbW+2*width,usbD+width,20]);
-		translate([width,-1,-1]) cube([usbW,usbD+1,22]);
+		cube([usbW+2*width,usbD+width,21]);
+		translate([width,-1,-1]) cube([usbW,usbD+1,23]);
 		}
 	}
 
