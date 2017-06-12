@@ -27,6 +27,12 @@ cablediam = 5;
 cutout = 6;
 lens = 17;
 
+// tripod mount size (slightly smaller to allow inset)
+tripod=9-0.5;
+
+// camera securing bar
+screw=3+0.1;
+depth=7;
 
 /* The actual design code */
 //rotate([90,0,0]) // lay on back to print
@@ -70,6 +76,16 @@ translate([camXY/2,camXY/2,-1-width]) hull(){
     cylinder(d=lens,h=width+2);
     translate([0, 6, 0])cylinder(d=lens,h=width+2);
 };
+
+// hole for tripod mount
+translate([width,0.01,wallH+tripod])
+    rotate([90,0,0])
+    cylinder(d=tripod,h=width+1);
+
+// hole for securing bar
+translate([-(width+1),camXY,(wallH-depth+screw)])
+    rotate([0,90,0])
+    cylinder(d=screw,h=camXY*2);
 
 };
 
