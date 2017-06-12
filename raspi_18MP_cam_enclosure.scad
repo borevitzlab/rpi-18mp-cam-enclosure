@@ -21,7 +21,7 @@ wallH = 20;
 width = 4;
 // dimensions of USB plug and cable to hold
 usbW = 16.5;
-usbD = 9;
+usbD = 8.9;
 cablediam = 5;
 // width of bottom cutout and diam of lens hole (inc. spacing)
 cutout = 6;
