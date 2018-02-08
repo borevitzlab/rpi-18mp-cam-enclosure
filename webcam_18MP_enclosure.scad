@@ -34,8 +34,13 @@ tripod=9-0.5;
 screw=3+0.1;
 depth=7;
 
+// clip settings
+display_thickness = 8; 
+clip_thickness = 2; 
+
 /* The actual design code */
 //rotate([90,0,0]) // lay on back to print
+translate([0,0,width])
 difference() {
 // Main brick to subtract from
 translate([-width,-width,-width]) union(){
@@ -56,7 +61,7 @@ difference(){
 // keeping a lip at the front...
 difference(){
     cube([camXY,camXY+width+1,wallH+1]);
-    translate([0, camXY, 0]) cube([2*camXY, width+1, height/8]);
+    translate([0, camXY, 0]) cube([2*camXY, width+1, display_thickness-2]);
 };
 translate([(camXY-cutout)/2,0,-1-width]) cube([cutout,camXY,width+2]);
 
@@ -78,5 +83,41 @@ translate([-(width+1),camXY,(wallH-depth+screw)])
 
 };
 
+// clip (round bit)
+translate([camXY/2, camXY+width/2+tripod*3,display_thickness+0.7])
 
+intersection(){
+    translate([0,0,-5])
+    cylinder(d=tripod,h=camXY*2);
+    difference(){
+    translate([-5,0,0])
+    rotate([0,90,0])
+    cylinder(d=tripod,h=camXY*2);
+    translate([-5,0,0])
+    rotate([0,90,0])
+    cylinder(d=tripod-5,h=camXY*2);
+    translate([-tripod,-tripod,-2])
+    cube([tripod*2,tripod*2,tripod*2]);
+    }
+}
 
+// clip (back)
+translate([camXY/2-tripod/2,camXY+width/2,display_thickness])
+rotate([-8,0,0])
+cube([tripod, tripod*3, 2]);
+
+// clip (front)
+translate([camXY-tripod/1.9,camXY+width/2,0])
+rotate([0,0,0])
+cube([tripod, tripod, 2]);
+translate([camXY-tripod/1.9,camXY+tripod+width/2,1])
+    rotate([0,90,0])
+    cylinder(d=2,h=tripod);
+
+translate([-tripod/2.1,camXY+width/2,0])
+rotate([0,0,0])
+cube([tripod, tripod, 2]);
+
+translate([-tripod/2.1,camXY+tripod+width/2,1])
+    rotate([0,90,0])
+    cylinder(d=2,h=tripod);
